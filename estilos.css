@@ -1,0 +1,12 @@
+#mensaje {
+    
+    color: red;
+}
+
+.oculto{
+    display: none;
+}
+
+.visible {
+    display: block;
+}
