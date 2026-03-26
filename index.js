@@ -1,19 +1,28 @@
-// Seleccionamos los elementos
+const loginForm = document.getElementById("loginForm");
+const mensajeError = document.getElementById("mensaje");
 const modal = document.getElementById("modalFondo");
-const btnAbrir = document.getElementById("linkOlvidar");
-const btnCerrar = document.getElementById("cerrarModal");
+const btnAbrirModal = document.getElementById("linkOlvidar");
+const btnCerrarModal = document.getElementById("cerrarModal");
 
-// Función para mostrar
-if (btnAbrir) {
-    btnAbrir.addEventListener("click", function(e) {
-        e.preventDefault();
-        modal.style.display = "flex"; // Forzamos que se vea
-    });
-}
+document.getElementById("iniciarSesionBtn").addEventListener("click", () => {
+    const usuario = document.getElementById("usuario").value;
+    const pass = document.getElementById("password").value;
 
-// Función para quitar la pestaña (Cerrar)
-if (btnCerrar) {
-    btnCerrar.addEventListener("click", function() {
-        modal.style.display = "none"; // Esto quita el cuadro y el fondo gris
-    });
-}
+    if (usuario === "" || pass === "") {
+        mensajeError.textContent = "Por favor, completa todos los campos";
+        mensajeError.classList.replace("oculto", "visible");
+    } else {
+        // Simulación de error de credenciales
+        mensajeError.textContent = "Usuario o contraseña incorrectos";
+        mensajeError.classList.replace("oculto", "visible");
+    }
+});
+
+btnAbrirModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.style.display = "flex"; 
+});
+
+btnCerrarModal.addEventListener("click", () => {
+    modal.style.display = "none";
+});
