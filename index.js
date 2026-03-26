@@ -1,24 +1,44 @@
-console.log("hola mundo");
+const usuarioCorrecto = "juanito123";
+const passwordCorrecto = "a0b1c2d3";
 
-var usuarioCorrecto = "juanito123";
-var passwordCorrecto = "a0b1c2d3";
+const usuarioTxt = document.getElementById("usuario");
+const passwordTxt = document.getElementById("password");
+const mensajeSpan = document.getElementById("mensaje");
+const botonLogin = document.getElementById("iniciarSesionBtn");
 
+const linkOlvidar = document.getElementById("linkOlvidar");
+const modal = document.getElementById("modalFondo");
+const btnCerrarModal = document.getElementById("cerrarModal");
 
-var usuarioTxt = document.getElementById("usuario");
-var passwordTxt = document.getElementById("password");
-var mensajeSpan = document.getElementById("mensaje");
-var boton = document.querySelector('button');
+function iniciarSesion() {
+    const user = usuarioTxt.value.trim();
+    const pass = passwordTxt.value.trim();
 
-function iniciarSesion(){
-    //Paso 1 validar que el usuario y contraseña no estén vacíos
-    // Paso 2 validar que el usuario y contraseña sean correctos
-    if(usuarioTxt.value === usuarioCorrecto && passwordTxt.value === passwordCorrecto){
-        alert("Bienvenido, " + usuarioTxt.value);
-    } else{
-        mensajeSpan.classList.remove("oculto");
-        mensajeSpan.classList.add("visible");
+    // Paso 1: Validar que no estén vacíos
+    if (user === "" || pass === "") {
+        mensajeSpan.textContent = "Por favor, llena todos los campos.";
+        mensajeSpan.className = "visible";
+        return;
+    }
+
+    if (user === usuarioCorrecto && pass === passwordCorrecto) {
+        mensajeSpan.className = "oculto";
+        alert("¡Bienvenido, " + user + "!");
+    } else {
+        mensajeSpan.textContent = "Usuario o contraseña incorrectos.";
+        mensajeSpan.className = "visible";
     }
 }
 
+function mostrarModal(e) {
+    e.preventDefault(); // Evita que el link recargue la página
+    modal.classList.replace("oculto", "visible");
+}
 
-boton.addEventListener("click", iniciarSesion);
+function ocultarModal() {
+    modal.classList.replace("visible", "oculto");
+}
+
+botonLogin.addEventListener("click", iniciarSesion);
+linkOlvidar.addEventListener("click", mostrarModal);
+btnCerrarModal.addEventListener("click", ocultarModal);
